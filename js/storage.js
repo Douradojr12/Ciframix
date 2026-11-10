@@ -13,7 +13,9 @@ CM.store={
  song:id=>db.songs.find(s=>s.id===id),
  setlist:list,
  pref(k,v){db.prefs=db.prefs||{};if(v===undefined)return db.prefs[k];db.prefs[k]=v;save()},
- addSong(s){const song={id:uid(),title:s.title.trim(),artist:(s.artist||'').trim(),key:(s.key||'').trim(),body:s.body||'',created:Date.now()};db.songs.push(song);save();return song},
+ addSong(s){const song={id:uid(),title:s.title.trim(),artist:(s.artist||'').trim(),key:(s.key||'').trim(),body:s.body||'',created:Date.now()};
+  if(s.album)song.album=String(s.album).trim().slice(0,120);if(s.year)song.year=String(s.year).trim().slice(0,4);if(/^https:\/\//.test(s.cover||''))song.cover=s.cover;
+  db.songs.push(song);save();return song},
  updateSong(id,p){const s=db.songs.find(x=>x.id===id);if(!s||!String(p.title||"").trim())return;s.title=p.title.trim();s.artist=(p.artist||"").trim();s.key=(p.key||"").trim();s.body=p.body||"";save();return s},
  deleteSong(id){db.songs=db.songs.filter(s=>s.id!==id);db.setlists.forEach(l=>{l.items=l.items.filter(i=>i.songId!==id)});save()},
  addSetlist(name){const l={id:uid(),name:name.trim()||'Novo pot-pourri',items:[],created:Date.now(),updated:Date.now()};db.setlists.push(l);save();return l},

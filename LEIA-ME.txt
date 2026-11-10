@@ -38,10 +38,16 @@ BACKUP DOS REPERTÓRIOS
 
 COMO USAR
 ---------
-1. Pesquisar -> Cadastrar música: cole ou digite a cifra (acordes numa linha, letra na linha de baixo)
-   e informe o tom, se souber. Também dá para importar um arquivo .txt.
-   (O CifraMix não busca cifras na internet: não existe API pública autorizada do Cifra Club.
-   Use apenas cifras suas ou que você tenha permissão para usar.)
+1. Pesquisar: digite o nome da música ou do artista. O app mostra o que há na sua biblioteca e, com internet,
+   resultados de um catálogo online (iTunes Search API da Apple e MusicBrainz): título, artista, álbum, ano e capa.
+   - Clique em "Procurar cifra" (abre uma busca em outra aba), copie a cifra do site que você usa,
+     volte e clique em "Adicionar com cifra" -> "Colar da área de transferência" -> "Salvar na biblioteca".
+     O app limpa o texto colado (caracteres invisíveis, linhas em branco demais) e reconhece o tom (linha "Tom: G").
+   - Também dá para digitar ou importar um .txt em "Cadastrar música".
+   - O CifraMix NÃO baixa cifras sozinho: não existe API pública autorizada do Cifra Club nem de outro site de cifras.
+     Use cifras suas ou que você tenha permissão de usar.
+   - Privacidade: a busca online envia o texto digitado à Apple/MusicBrainz. Desmarque
+     "Pesquisar também no catálogo online" para usar só a biblioteca (a escolha fica salva).
 2. Biblioteca -> Novo pot-pourri: adicione músicas, reordene (arraste ⠿ ou use ▲▼), ajuste o tom e anote.
 3. Tocar pot-pourri: todas as músicas em uma página. Iniciar rola sozinho; Modo palco para tocar ao vivo.
 Atalhos: Espaço pausa/continua | seta para cima/baixo velocidade | direita/esquerda troca de música | Esc sai do palco.
@@ -49,10 +55,10 @@ Atalhos: Espaço pausa/continua | seta para cima/baixo velocidade | direita/esqu
 ESTRUTURA DOS ARQUIVOS
 ----------------------
 index.html, manifest.webmanifest, sw.js (offline), css/, js/ (storage, ui, source-adapter, search,
-chord-engine, transposer, navigation, autoscroll, setlist, presentation, help, app), assets/icons/, tests/.
+catalog, chord-engine, transposer, navigation, autoscroll, setlist, presentation, help, app), assets/icons/, tests/.
 Para adicionar uma fonte autorizada de cifras: crie uma classe que estenda SourceAdapter (js/source-adapter.js)
 e registre com CM.registerSource(). Se alterar qualquer arquivo do app, aumente VERSION em sw.js.
 
 TESTES (opcional, para desenvolvedores)
 ---------------------------------------
-node tests/transposer.test.js  |  node tests/autoscroll.test.js  |  python3 tests/e2e.py  |  python3 tests/e2e_pwa.py
+node tests/transposer.test.js  |  node tests/transposer2.test.js  |  node tests/harmony.test.js  |  node tests/catalog.test.js  |  node tests/autoscroll.test.js  |  python3 tests/e2e.py  |  python3 tests/e2e_pwa.py  |  python3 tests/e2e_catalog.py

@@ -1,6 +1,6 @@
 /* Service worker do CifraMix: guarda o app no aparelho para abrir sem internet.
    Ao alterar qualquer arquivo do app, aumente a versão abaixo. */
-const VERSION='ciframix-v1';
+const VERSION='ciframix-v4';
 const FILES=[
  "./",
  "index.html",
@@ -9,6 +9,7 @@ const FILES=[
  "css/responsive.css",
  "js/app.js",
  "js/autoscroll.js",
+ "js/catalog.js",
  "js/chord-engine.js",
  "js/navigation.js",
  "js/presentation.js",

@@ -6,6 +6,7 @@ CM.norm=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLower
 CM.SourceAdapter=class{
  get id(){throw new Error('id não definido')}
  get name(){throw new Error('name não definido')}
+ get remote(){return false}   /* true = consulta um serviço online (só roda quando o usuário pede) */
  /* Retorna [{ref,title,artist,key,source}] */
  async search(query){return []}
  /* Retorna {title,artist,key,body} para um resultado de search() */
@@ -20,7 +21,7 @@ class LocalSource extends CM.SourceAdapter{
  async search(q){
   const n=CM.norm(q);
   return CM.store.songs().filter(s=>!n||CM.norm(s.title).includes(n)||CM.norm(s.artist).includes(n))
-   .map(s=>({ref:s.id,title:s.title,artist:s.artist,key:s.key,source:this.name}));
+   .map(s=>({ref:s.id,title:s.title,artist:s.artist,key:s.key,cover:s.cover,source:this.name}));
  }
  async getChart(ref){return CM.store.song(ref)||null}
 }
